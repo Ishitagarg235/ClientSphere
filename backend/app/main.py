@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 
 from app.routes import (
     project_routes,
@@ -30,3 +31,4 @@ app.include_router(project_routes.router, prefix="/api/projects", tags=["Project
 app.include_router(client_routes.router, prefix="/api/clients", tags=["Clients"])
 app.include_router(contact_routes.router, prefix="/api/contacts", tags=["Contacts"])
 app.include_router(newsletter_routes.router, prefix="/api/newsletter", tags=["Newsletter"])
+app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
